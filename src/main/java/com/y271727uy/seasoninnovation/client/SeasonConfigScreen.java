@@ -15,20 +15,16 @@ public final class SeasonConfigScreen extends Screen {
 
     private int rainGrowthLabelY;
     private int hudScaleLabelY;
-    private int hudDayXLabelY;
-    private int hudTimeXLabelY;
-    private int hudDayYLabelY;
-    private int hudTimeYLabelY;
+    private int hudXLabelY;
+    private int hudYLabelY;
 
     private CycleButton<Boolean> restrictFishingLootButton;
     private CycleButton<Boolean> restrictAnimalBreedingButton;
     private CycleButton<Boolean> sendActionBarFeedbackButton;
     private CycleButton<Boolean> weatherAffectsCropGrowthButton;
     private EditBox rainGrowthBonusChanceBox;
-    private EditBox hudDayXBox;
-    private EditBox hudDayYBox;
-    private EditBox hudTimeXBox;
-    private EditBox hudTimeYBox;
+    private EditBox hudXBox;
+    private EditBox hudYBox;
     private EditBox hudScaleBox;
 
     public SeasonConfigScreen(Screen parent) {
@@ -70,22 +66,14 @@ public final class SeasonConfigScreen extends Screen {
                 Component.translatable("screen.season_innovation.config.hud_scale"), Float.toString(Config.hudScale)));
         y += rowHeight;
 
-        hudDayXLabelY = y + 6;
-        hudDayXBox = addRenderableWidget(createNumberBox(left + labelWidth, y, fieldWidth,
-                Component.translatable("screen.season_innovation.config.hud_day_x"), Integer.toString(Config.hudDayX)));
-
-        hudTimeXLabelY = y + 6;
-        hudTimeXBox = addRenderableWidget(createNumberBox(right + labelWidth, y, fieldWidth,
-                Component.translatable("screen.season_innovation.config.hud_time_x"), Integer.toString(Config.hudTimeX)));
+        hudXLabelY = y + 6;
+        hudXBox = addRenderableWidget(createNumberBox(left + labelWidth, y, fieldWidth,
+                Component.translatable("screen.season_innovation.config.hud_x"), Integer.toString(Config.hudX)));
         y += rowHeight;
 
-        hudDayYLabelY = y + 6;
-        hudDayYBox = addRenderableWidget(createNumberBox(left + labelWidth, y, fieldWidth,
-                Component.translatable("screen.season_innovation.config.hud_day_y"), Integer.toString(Config.hudDayY)));
-
-        hudTimeYLabelY = y + 6;
-        hudTimeYBox = addRenderableWidget(createNumberBox(right + labelWidth, y, fieldWidth,
-                Component.translatable("screen.season_innovation.config.hud_time_y"), Integer.toString(Config.hudTimeY)));
+        hudYLabelY = y + 6;
+        hudYBox = addRenderableWidget(createNumberBox(left + labelWidth, y, fieldWidth,
+                Component.translatable("screen.season_innovation.config.hud_y"), Integer.toString(Config.hudY)));
 
         int buttonY = this.height - 28;
         addRenderableWidget(Button.builder(Component.translatable("gui.done"), button -> onSave())
@@ -118,10 +106,8 @@ public final class SeasonConfigScreen extends Screen {
                 sendActionBarFeedbackButton.getValue(),
                 weatherAffectsCropGrowthButton.getValue(),
                 parseDouble(rainGrowthBonusChanceBox, Config.rainGrowthBonusChance),
-                parseInt(hudDayXBox, Config.hudDayX),
-                parseInt(hudDayYBox, Config.hudDayY),
-                parseInt(hudTimeXBox, Config.hudTimeX),
-                parseInt(hudTimeYBox, Config.hudTimeY),
+                parseInt(hudXBox, Config.hudX),
+                parseInt(hudYBox, Config.hudY),
                 (float) parseDouble(hudScaleBox, Config.hudScale)
         );
         onClose();
@@ -143,10 +129,8 @@ public final class SeasonConfigScreen extends Screen {
     private void renderLabels(GuiGraphics guiGraphics) {
         guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.rain_growth_bonus_chance"), leftColumnX, rainGrowthLabelY, 0xFFFFFF, false);
         guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.hud_scale"), rightColumnX, hudScaleLabelY, 0xFFFFFF, false);
-        guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.hud_day_x"), leftColumnX, hudDayXLabelY, 0xFFFFFF, false);
-        guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.hud_time_x"), rightColumnX, hudTimeXLabelY, 0xFFFFFF, false);
-        guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.hud_day_y"), leftColumnX, hudDayYLabelY, 0xFFFFFF, false);
-        guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.hud_time_y"), rightColumnX, hudTimeYLabelY, 0xFFFFFF, false);
+        guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.hud_x"), leftColumnX, hudXLabelY, 0xFFFFFF, false);
+        guiGraphics.drawString(this.font, Component.translatable("screen.season_innovation.config.hud_y"), leftColumnX, hudYLabelY, 0xFFFFFF, false);
     }
 
     private static int parseInt(EditBox editBox, int fallback) {

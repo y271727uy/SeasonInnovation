@@ -37,21 +37,13 @@ public final class Config {
             .comment("Chance for rain-exposed crops to receive one extra random growth tick after growing.")
             .defineInRange("rainGrowthBonusChance", 0.35D, 0.0D, 1.0D);
 
-    private static final ForgeConfigSpec.IntValue HUD_DAY_X = BUILDER
-            .comment("Top-left anchored X coordinate for the day counter HUD.")
-            .defineInRange("hudDayX", 6, 0, Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue HUD_X = BUILDER
+            .comment("Top-left anchored X coordinate for the seasonal HUD block.")
+            .defineInRange("hudX", 30, 0, Integer.MAX_VALUE);
 
-    private static final ForgeConfigSpec.IntValue HUD_DAY_Y = BUILDER
-            .comment("Top-left anchored Y coordinate for the day counter HUD.")
-            .defineInRange("hudDayY", 14, 0, Integer.MAX_VALUE);
-
-    private static final ForgeConfigSpec.IntValue HUD_TIME_X = BUILDER
-            .comment("Top-left anchored X coordinate for the time HUD, including the clock icon.")
-            .defineInRange("hudTimeX", 6, 0, Integer.MAX_VALUE);
-
-    private static final ForgeConfigSpec.IntValue HUD_TIME_Y = BUILDER
-            .comment("Top-left anchored Y coordinate for the time HUD, including the clock icon.")
-            .defineInRange("hudTimeY", 28, 0, Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue HUD_Y = BUILDER
+            .comment("Top-left anchored Y coordinate for the seasonal HUD block.")
+            .defineInRange("hudY", 14, 0, Integer.MAX_VALUE);
 
     private static final ForgeConfigSpec.DoubleValue HUD_SCALE = BUILDER
             .comment("Overall scale for the top-left HUD blocks.")
@@ -64,10 +56,8 @@ public final class Config {
     public static boolean sendActionBarFeedback;
     public static boolean weatherAffectsCropGrowth;
     public static double rainGrowthBonusChance;
-    public static int hudDayX;
-    public static int hudDayY;
-    public static int hudTimeX;
-    public static int hudTimeY;
+    public static int hudX;
+    public static int hudY;
     public static float hudScale;
 
     private Config() {
@@ -84,10 +74,8 @@ public final class Config {
         sendActionBarFeedback = SEND_ACTION_BAR_FEEDBACK.get();
         weatherAffectsCropGrowth = WEATHER_AFFECTS_CROP_GROWTH.get();
         rainGrowthBonusChance = RAIN_GROWTH_BONUS_CHANCE.get();
-        hudDayX = HUD_DAY_X.get();
-        hudDayY = HUD_DAY_Y.get();
-        hudTimeX = HUD_TIME_X.get();
-        hudTimeY = HUD_TIME_Y.get();
+        hudX = HUD_X.get();
+        hudY = HUD_Y.get();
         hudScale = HUD_SCALE.get().floatValue();
     }
 
@@ -97,10 +85,8 @@ public final class Config {
             boolean sendActionBarFeedbackValue,
             boolean weatherAffectsCropGrowthValue,
             double rainGrowthBonusChanceValue,
-            int hudDayXValue,
-            int hudDayYValue,
-            int hudTimeXValue,
-            int hudTimeYValue,
+            int hudXValue,
+            int hudYValue,
             float hudScaleValue
     ) {
         restrictFishingLoot = restrictFishingLootValue;
@@ -108,10 +94,8 @@ public final class Config {
         sendActionBarFeedback = sendActionBarFeedbackValue;
         weatherAffectsCropGrowth = weatherAffectsCropGrowthValue;
         rainGrowthBonusChance = clampDouble(rainGrowthBonusChanceValue, 0.0D, 1.0D);
-        hudDayX = clampInt(hudDayXValue, 0, Integer.MAX_VALUE);
-        hudDayY = clampInt(hudDayYValue, 0, Integer.MAX_VALUE);
-        hudTimeX = clampInt(hudTimeXValue, 0, Integer.MAX_VALUE);
-        hudTimeY = clampInt(hudTimeYValue, 0, Integer.MAX_VALUE);
+        hudX = Math.max(0, hudXValue);
+        hudY = Math.max(0, hudYValue);
         hudScale = (float) clampDouble(hudScaleValue, 0.25D, 4.0D);
 
         saveToDisk();
@@ -130,18 +114,12 @@ public final class Config {
                 #Chance for rain-exposed crops to receive one extra random growth tick after growing.
                 #Range: 0.0 ~ 1.0
                 rainGrowthBonusChance = %s
-                #Top-left anchored X coordinate for the day counter HUD.
+                #Top-left anchored X coordinate for the seasonal HUD block.
                 #Range: > 0
-                hudDayX = %d
-                #Top-left anchored Y coordinate for the day counter HUD.
+                hudX = %d
+                #Top-left anchored Y coordinate for the seasonal HUD block.
                 #Range: > 0
-                hudDayY = %d
-                #Top-left anchored X coordinate for the time HUD, including the clock icon.
-                #Range: > 0
-                hudTimeX = %d
-                #Top-left anchored Y coordinate for the time HUD, including the clock icon.
-                #Range: > 0
-                hudTimeY = %d
+                hudY = %d
                 #Overall scale for the top-left HUD blocks.
                 #Range: 0.25 ~ 4.0
                 hudScale = %s
@@ -152,10 +130,8 @@ public final class Config {
                 sendActionBarFeedback,
                 weatherAffectsCropGrowth,
                 formatDouble(rainGrowthBonusChance),
-                hudDayX,
-                hudDayY,
-                hudTimeX,
-                hudTimeY,
+                hudX,
+                hudY,
                 formatDouble(hudScale)
         );
 
@@ -167,9 +143,6 @@ public final class Config {
         }
     }
 
-    private static int clampInt(int value, int min, int max) {
-        return Math.max(min, Math.min(max, value));
-    }
 
     private static double clampDouble(double value, double min, double max) {
         return Math.max(min, Math.min(max, value));
