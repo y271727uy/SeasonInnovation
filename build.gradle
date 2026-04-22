@@ -19,6 +19,18 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Modrinth'
+                url = uri('https://api.modrinth.com/maven')
+            }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
+    }
 }
 
 base {
@@ -67,7 +79,7 @@ legacyForge {
         data {
             data()
 
-            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // y271727uy of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
             // gameDirectory = project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
@@ -118,7 +130,18 @@ obfuscation {
 dependencies {
     // If you wish to declare dependencies against mods, make sure to use the 'mod*' configurations so that they're remapped.
 	// See https://github.com/neoforged/ModDevGradle/blob/main/LEGACY.md#remapping-mod-dependencies for more information.
-	
+
+    modCompileOnly("maven.modrinth:serene-seasons:YXTfAkOf")
+
+    modLocalRuntime("maven.modrinth:glitchcore:0.0.1.1")
+    modLocalRuntime("maven.modrinth:serene-seasons:YXTfAkOf")
+    modLocalRuntime("maven.modrinth:seasonhud:1.20.1-1.13.17")
+    modLocalRuntime("maven.modrinth:serene-seasons-fix:fwG8dmI2")
+    modCompileOnly("maven.modrinth:jade:11.13.2+forge")
+    modLocalRuntime("maven.modrinth:jade:11.13.2+forge")
+    modLocalRuntime("maven.modrinth:xaeros-world-map:vUbAYOnm")
+    modLocalRuntime("maven.modrinth:xaeros-minimap:iMXAV165")
+
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // modCompileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
@@ -177,8 +200,13 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_description          : mod_description
     ]
     inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
+    from("src/main/templates") {
+        exclude "**/*.jar"
+        expand replaceProperties
+    }
+    from("src/main/templates") {
+        include "**/*.jar"
+    }
     into "build/generated/sources/modMetadata"
 }
 // Include the output of "generateModMetadata" as an input directory for the build

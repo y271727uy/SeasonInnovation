@@ -1,0 +1,27 @@
+{
+  "message.season_innovation.fishing_blocked": "捕捞季节：%s",
+  "message.season_innovation.fishing_reduced": "捕捞季节：%s",
+  "message.season_innovation.breeding_blocked": "当前季节不可繁殖,可繁殖季节：%s",
+  "config.jade.plugin_season_innovation.animal_breeding_seasons": "动物可繁殖季节",
+  "config.jade.plugin_season_innovation.animal_breeding_seasons.desc": "在 Jade 提示框中显示该动物的可繁殖季节。",
+  "tooltip.season_innovation.breeding_seasons": "可繁殖季节：%s",
+  "tooltip.season_innovation.fishing_seasons": "捕捞季节：%s",
+  "screen.season_innovation.config.title": "Season Innovation 配置",
+  "screen.season_innovation.config.restrict_fishing_loot": "限制鱼类垂钓",
+  "screen.season_innovation.config.restrict_animal_breeding": "限制动物繁殖",
+  "screen.season_innovation.config.send_action_bar_feedback": "显示动作栏提示",
+  "screen.season_innovation.config.weather_affects_crop_growth": "天气影响作物生长",
+  "screen.season_innovation.config.rain_growth_bonus_chance": "雨天加速生长概率",
+  "screen.season_innovation.config.hud_scale": "HUD 缩放",
+  "screen.season_innovation.config.hud_day_x": "日期 HUD X",
+  "screen.season_innovation.config.hud_day_y": "日期 HUD Y",
+  "screen.season_innovation.config.hud_time_x": "时间 HUD X",
+  "screen.season_innovation.config.hud_time_y": "时间 HUD Y",
+  "hud.season_innovation.day_counter": "第%s年第%s日",
+  "season.season_innovation.spring": "春季",
+  "season.season_innovation.summer": "夏季",
+  "season.season_innovation.autumn": "秋季",
+  "season.season_innovation.winter": "冬季",
+  "season.season_innovation.year_round": "全年"
+}
+
